@@ -1,2 +1,2 @@
 # getPassword
-Yet another password generator but with a twist.
+Yet another password generator.
