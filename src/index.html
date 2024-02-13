@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link href="./output.css" rel="stylesheet">
+    <style>
+        /* Custom Font: Pixelated Style */
+        @font-face {
+        font-family: 'Pixel';
+        src: url('slkscr.ttf') format('truetype'),
+             url('slkscrb.ttf') format('truetype'),
+             url('slkscrc.ttf') format('truetype');
+        }
+        body{
+            font-family: 'Pixel';
+        }
+    </style>
+</head>
+<body class="bg-neutral-900 text-red-500 flex justify-center items-center h-screen">
+    <div class="container mx-auto p-6 bg-neutral-900 rounded-md shadow-md">
+        <h2 class="text-2xl font-semibold mb-4">Password Generator</h2>
+        <label for="length" class="block mb-2">Length (min:4, max:20):</label>
+        <input type="range" id="length" min="4" max="20" value="8" class="accent-red-500 w-full mb-4">
+        <div class="mb-4">
+            <input type="checkbox" id="uppercase" class="accent-red-500 mr-2">
+            <label for="uppercase">Uppercase Letters</label>
+        </div>
+        <div class="mb-4">
+            <input type="checkbox" id="lowercase" class="accent-red-500 mr-2">
+            <label for="lowercase">Lowercase Letters</label>
+        </div>
+        <div class="mb-4">
+            <input type="checkbox" id="digits" class="accent-red-500 mr-2">
+            <label for="digits">Digits</label>
+        </div>
+        <div class="mb-4">
+            <input type="checkbox" id="special" class="accent-red-500 mr-2">
+            <label for="special">Special Characters</label>
+        </div>
+        <button onclick="generatePassword()" class="bg-neutral-800 hover:bg-neutral-700 font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded mb-4">
+            Generate Password
+        </button>
+        <input type="text" id="password" readonly class="w-full bg-neutral-800 font-bold rounded-md px-4 py-2 focus:outline-none focus:border-blue-500">
+
+    </div>
+
+    <script>
+        function generatePassword() {
+            let length = document.getElementById('length').value;
+            let useUppercase = document.getElementById('uppercase').checked;
+            let useLowercase = document.getElementById('lowercase').checked;
+            let useDigits = document.getElementById('digits').checked;
+            let useSpecial = document.getElementById('special').checked;
+
+            let charset = "";
+            if (useUppercase) charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (useLowercase) charset += "abcdefghijklmnopqrstuvwxyz";
+            if (useDigits) charset += "0123456789";
+            if (useSpecial) charset += "!@#$%^&*()_+";
+            
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+
+            document.getElementById('password').value = password;
+        }
+    </script>
+</body>
+</html>
